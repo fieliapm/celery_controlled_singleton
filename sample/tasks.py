@@ -27,6 +27,7 @@ def add(self, x, y):
     t = celery_controlled_singleton.is_first_started_task(celery_app, self)
     print("first? %s %s" % (self.request.id, t))
     if not t:
+        print('add skip %s %f' % (self.request.id, time.time()))
         return None
 
     time.sleep(5.0)
@@ -47,6 +48,7 @@ def sub(self, x, y):
     t = celery_controlled_singleton.is_first_started_task(celery_app, self, __sub_task_filter, timeout=2.0)
     print("first? %s %s" % (self.request.id, t))
     if not t:
+        print('sub skip %s %f' % (self.request.id, time.time()))
         return None
 
     time.sleep(5.0)
