@@ -1,0 +1,2 @@
+celery
+-e git+https://github.com/fieliapm/celery_controlled_singleton.git#egg=celery_controlled_singleton
