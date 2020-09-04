@@ -20,6 +20,8 @@
 
 import time
 
+import six
+
 
 __all__ = ['get_task_start_rank', 'is_first_started_task']
 
@@ -50,12 +52,20 @@ def iter_task_list(task_list):
 
 
 def __filter_task(task_status, self_task_name, task_filter_func):
-    #return task_status['name'] == self_task_name and task_filter_func is None or task_filter_func(task_status['args'], task_status['kwargs'])
+    # both args and kwargs are string type when celery<4.4.0rc1 
+    args = task_status['args']
+    kwargs = task_status['kwargs']
+    if isinstance(args, six.string_types):
+        args = eval(args)
+    if isinstance(kwargs, six.string_types):
+        kwargs = eval(kwargs)
+
+    #return task_status['name'] == self_task_name and task_filter_func is None or task_filter_func(args, kwargs)
     if task_status['name'] == self_task_name:
         if task_filter_func is None:
             return True
         else:
-            return task_filter_func(task_status['args'], task_status['kwargs'])
+            return task_filter_func(args, kwargs)
     else:
         return False
 

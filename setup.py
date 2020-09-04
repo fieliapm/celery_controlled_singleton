@@ -29,6 +29,7 @@ setup(name='celery_controlled_singleton',
     url='https://github.com/fieliapm/celery_controlled_singleton',
     py_modules=['celery_controlled_singleton'],
     install_requires=[
+        'six',
         'celery>=4.2.0rc1', # first version support absolute time_start of task
     ],
 )
