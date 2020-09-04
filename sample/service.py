@@ -12,7 +12,7 @@ import tasks
 
 def run(task):
     result_list = []
-    for i in range(6):
+    for i in range(30):
         result = task.apply_async(args=(i, 1))
         result_list.append(result)
         time.sleep(1.0)
